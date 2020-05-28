@@ -1,20 +1,33 @@
 ﻿<Properties StartupConfiguration="{81AB8DCA-7726-A80C-55E8-36C06CD97565}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlayerInput.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ThisProject/Character/PlayerInput.cs">
     <Files>
-      <File FileName="Assets/Scripts/PlayerTest.cs" Line="54" Column="10" />
-      <File FileName="Assets/Scripts/CharacterBaseValue.cs" Line="13" Column="27" />
+      <File FileName="Assets/Scripts/ThisProject/Character/CharacterMovement.cs" Line="28" Column="6" />
+      <File FileName="Assets/Scripts/ThisProject/Character/PlayerInput.cs" Line="7" Column="1" />
+      <File FileName="Assets/Scripts/ThisProject/Character/CharacterBaseValue.cs" Line="16" Column="40" />
+      <File FileName="Assets/Scripts/ThisProject/CursorManager.cs" Line="18" Column="51" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="Project_C" expanded="True" selected="True" />
+          <Node name="Project_C" expanded="True">
+            <Node name="Assets" expanded="True">
+              <Node name="Scripts" expanded="True">
+                <Node name="ThisProject" expanded="True">
+                  <Node name="Character" expanded="True">
+                    <Node name="PlayerInput.cs" selected="True" />
+                  </Node>
+                  <Node name="Interface" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
+          </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="4cc17222-69bb-4867-8253-0911b7960df0" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="10a7f31a-9b07-4e8f-9202-b8d02c1405da" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

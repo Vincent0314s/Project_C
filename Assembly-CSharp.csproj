@@ -64,8 +64,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\EnumListStorage.cs" />
-    <Compile Include="Assets\Scripts\CharacterBaseValue.cs" />
-    <Compile Include="Assets\Scripts\PlayerInput.cs" />
+    <Compile Include="Assets\Scripts\ThisProject\Character\CharacterBaseValue.cs" />
+    <Compile Include="Assets\Scripts\ThisProject\Character\CharacterMovement.cs" />
+    <Compile Include="Assets\Scripts\ThisProject\Character\PlayerInput.cs" />
+    <Compile Include="Assets\Scripts\ThisProject\CursorManager.cs" />
+    <Compile Include="Assets\Scripts\ThisProject\Interface\IMovement.cs" />
     <Compile Include="Assets\Scripts\UsefulScript\AI\AIStateManager.cs" />
     <Compile Include="Assets\Scripts\UsefulScript\AI\EnemyStateMachine.cs" />
     <Compile Include="Assets\Scripts\UsefulScript\Enums\ArrayElementTitleAttribute.cs" />
