@@ -18,8 +18,8 @@ public class CharacterMovement : MonoBehaviour
     public float backwardMovementSmoothValue = 0.1f;
     private float backwardMovementSmoothVelocity;
 
-    private bool isMoving;
-    private bool isForward;
+    public bool isMoving { get; private set; }
+    public bool isForward { get; private set; }
 
     private Vector3 direction;
     private CharacterBaseValue cbv;

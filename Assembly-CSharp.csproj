@@ -64,9 +64,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\EnumListStorage.cs" />
+    <Compile Include="Assets\Scripts\ThisProject\Character\BasicAnimationEvent.cs" />
     <Compile Include="Assets\Scripts\ThisProject\Character\CharacterBaseValue.cs" />
     <Compile Include="Assets\Scripts\ThisProject\Character\CharacterMovement.cs" />
-    <Compile Include="Assets\Scripts\ThisProject\Character\PlayerInput.cs" />
+    <Compile Include="Assets\Scripts\ThisProject\Character\PlayerAnimationEvent.cs" />
+    <Compile Include="Assets\Scripts\ThisProject\Character\PlayerComboInput.cs" />
+    <Compile Include="Assets\Scripts\ThisProject\Character\PlayerSpecialised.cs" />
+    <Compile Include="Assets\Scripts\ThisProject\CombatMethod.cs" />
     <Compile Include="Assets\Scripts\ThisProject\CursorManager.cs" />
     <Compile Include="Assets\Scripts\ThisProject\Interface\IMovement.cs" />
     <Compile Include="Assets\Scripts\UsefulScript\AI\AIStateManager.cs" />

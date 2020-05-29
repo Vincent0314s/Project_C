@@ -9,12 +9,12 @@ public class CursorManager : MonoBehaviour
         LockCursor();
     }
 
-    public void LockCursor() {
+    public static void LockCursor() {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
-    public void UnLockCursor() {
+    public static void UnLockCursor() {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
     }
