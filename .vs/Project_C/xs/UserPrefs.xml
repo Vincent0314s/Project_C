@@ -2,9 +2,9 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ThisProject/Character/PlayerComboInput.cs">
     <Files>
       <File FileName="Assets/Scripts/ThisProject/Character/CharacterMovement.cs" Line="39" Column="26" />
-      <File FileName="Assets/Scripts/ThisProject/Character/CharacterBaseValue.cs" Line="65" Column="25" />
-      <File FileName="Assets/Scripts/ThisProject/Character/PlayerComboInput.cs" Line="45" Column="14" />
-      <File FileName="Assets/Scripts/ThisProject/Character/PlayerSpecialised.cs" Line="76" Column="10" />
+      <File FileName="Assets/Scripts/ThisProject/Character/CharacterBaseValue.cs" />
+      <File FileName="Assets/Scripts/ThisProject/Character/PlayerComboInput.cs" Line="266" Column="39" />
+      <File FileName="Assets/Scripts/ThisProject/Character/PlayerSpecialised.cs" />
       <File FileName="Assets/Scripts/ThisProject/Character/PlayerAnimationEvent.cs" />
       <File FileName="Assets/Scripts/ThisProject/Character/BasicAnimationEvent.cs" />
     </Files>
@@ -29,7 +29,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="608e62d8-72d7-4a1d-b91e-6b40126941cf" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="d383b8b0-ee3e-467b-89b1-c1993eb2f2a4" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
