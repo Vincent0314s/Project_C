@@ -48,9 +48,10 @@ public class CharacterMovement : MonoBehaviour
             }
         }
         else {
-            cbv.anim.SetFloat("ForwardSpeed", 0, forwardMovementSmoothValue, Time.deltaTime);
-            cbv.anim.SetFloat("BackwardSpeed", 0, forwardMovementSmoothValue, Time.deltaTime);
+            cbv.anim.SetFloat("ForwardSpeed", 0f, forwardMovementSmoothValue, Time.deltaTime);
+            cbv.anim.SetFloat("BackwardSpeed", 0f, forwardMovementSmoothValue, Time.deltaTime);
         }
+        cbv.anim.SetBool("isMoving",isMoving);
     }
 
     private void FixedUpdate()

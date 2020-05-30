@@ -190,7 +190,14 @@ public class PlayerComboInput : MonoBehaviour
             else {
                 combos[i].Reset();
             }
-           
+        }
+
+        if (cbv.IsInCurrentAnimationState(AnimationTag.Recover))
+        {
+            cbv.anim.SetFloat("ComboRecover", 1, 0.75f, Time.deltaTime);
+        }
+        else {
+            cbv.anim.SetFloat("ComboRecover", 0);
         }
 
         ComboInput currentInput = null;
