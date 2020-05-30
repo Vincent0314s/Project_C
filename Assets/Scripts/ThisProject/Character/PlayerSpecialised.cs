@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerStateBehaviour
+public enum PlayerBasicState
 {
     Idle,
     MovingForward,
     MovingBackward,
     Defending,
     Dodging,
-    L,
-    LL,
-    SL,
-    Temp,
     Hurt_Light,
     Hurt_Heavy,
     Hurt_Down,
@@ -20,10 +16,18 @@ public enum PlayerStateBehaviour
     Dead,
 }
 
+public enum PlayerComboState {
+    None,
+    L,
+    LL,
+    SL,
+}
+
 
 public class PlayerSpecialised : MonoBehaviour
 {
-    public PlayerStateBehaviour playerState;
+    public PlayerBasicState playerState;
+    public PlayerComboState playerCombo;
     private CharacterMovement cm;
     private CharacterBaseValue cbv;
 
@@ -40,7 +44,7 @@ public class PlayerSpecialised : MonoBehaviour
     {
         cm = GetComponent<CharacterMovement>();
         cbv = GetComponent<CharacterBaseValue>();
-        SetStateBehaviour(PlayerStateBehaviour.Idle);
+        SetStateBehaviour(PlayerBasicState.Idle);
     }
 
     void Update()
@@ -76,58 +80,58 @@ public class PlayerSpecialised : MonoBehaviour
         //}
 
         if (cbv.isDefending)
-            SetStateBehaviour(PlayerStateBehaviour.Defending);
+            SetStateBehaviour(PlayerBasicState.Defending);
         if (cbv.isDodging)
-            SetStateBehaviour(PlayerStateBehaviour.Dodging);
+            SetStateBehaviour(PlayerBasicState.Dodging);
         if (cbv.IsDead())
-            SetStateBehaviour(PlayerStateBehaviour.Dead);
+            SetStateBehaviour(PlayerBasicState.Dead);
         if (!cbv.IsInCurrentAnimationState(AnimationTag.Combo)) {
             if (direction == Vector3.zero)
-                SetStateBehaviour(PlayerStateBehaviour.Idle);
+                SetStateBehaviour(PlayerBasicState.Idle);
+
+            SetComboState(PlayerComboState.None);
         }
     }
 
 
 
-    public void SetStateBehaviour(PlayerStateBehaviour psb) {
+    public void SetStateBehaviour(PlayerBasicState psb) {
         switch (psb) {
-            case PlayerStateBehaviour.Idle:
+            case PlayerBasicState.Idle:
 
                 break;
-            case PlayerStateBehaviour.MovingForward:
+            case PlayerBasicState.MovingForward:
 
                 break;
-            case PlayerStateBehaviour.MovingBackward:
+            case PlayerBasicState.MovingBackward:
 
                 break;
-            case PlayerStateBehaviour.Defending:
+            case PlayerBasicState.Defending:
 
                 break;
-            case PlayerStateBehaviour.Dodging:
+            case PlayerBasicState.Dodging:
 
                 break;
-            case PlayerStateBehaviour.L:
+            case PlayerBasicState.Hurt_Light:
 
                 break;
-            case PlayerStateBehaviour.LL:
+            case PlayerBasicState.Hurt_Heavy:
 
                 break;
-            case PlayerStateBehaviour.Hurt_Light:
+            case PlayerBasicState.Hurt_Down:
 
                 break;
-            case PlayerStateBehaviour.Hurt_Heavy:
+            case PlayerBasicState.Hurt_DefenceBreak:
 
                 break;
-            case PlayerStateBehaviour.Hurt_Down:
-
-                break;
-            case PlayerStateBehaviour.Hurt_DefenceBreak:
-
-                break;
-            case PlayerStateBehaviour.Dead:
+            case PlayerBasicState.Dead:
 
                 break;
         }
         playerState = psb;
+    }
+
+    public void SetComboState(PlayerComboState pcs) {
+        playerCombo = pcs;
     }
 }

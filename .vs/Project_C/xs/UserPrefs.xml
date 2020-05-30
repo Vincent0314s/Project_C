@@ -1,22 +1,24 @@
 ﻿<Properties StartupConfiguration="{81AB8DCA-7726-A80C-55E8-36C06CD97565}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ThisProject/Character/PlayerSpecialised.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ThisProject/Character/PlayerComboInput.cs">
     <Files>
       <File FileName="Assets/Scripts/ThisProject/Character/CharacterMovement.cs" Line="94" Column="26" />
-      <File FileName="Assets/Scripts/ThisProject/Character/CharacterBaseValue.cs" Line="15" Column="2" />
-      <File FileName="Assets/Scripts/ThisProject/Character/PlayerComboInput.cs" Line="184" Column="45" />
-      <File FileName="Assets/Scripts/ThisProject/Character/PlayerSpecialised.cs" Line="7" Column="10" />
+      <File FileName="Assets/Scripts/ThisProject/Character/CharacterBaseValue.cs" />
+      <File FileName="Assets/Scripts/ThisProject/Character/PlayerComboInput.cs" Line="41" Column="31" />
+      <File FileName="Assets/Scripts/ThisProject/Character/PlayerSpecialised.cs" Line="92" Column="48" />
       <File FileName="Assets/Scripts/ThisProject/Character/PlayerAnimationEvent.cs" />
-      <File FileName="Assets/Scripts/ThisProject/Character/BasicAnimationEvent.cs" />
+      <File FileName="Assets/Scripts/ThisProject/Character/BasicAnimationEvent.cs" Line="1" Column="1" />
+      <File FileName="Assets/Editor/ArrayElementTitleDrawer.cs" Line="29" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Project_C" expanded="True">
             <Node name="Assets" expanded="True">
+              <Node name="Editor" expanded="True" />
               <Node name="Scripts" expanded="True">
                 <Node name="ThisProject" expanded="True">
                   <Node name="Character" expanded="True">
-                    <Node name="PlayerSpecialised.cs" selected="True" />
+                    <Node name="PlayerComboInput.cs" selected="True" />
                   </Node>
                   <Node name="Interface" expanded="True" />
                 </Node>
@@ -29,7 +31,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="a10b0ed9-fe2b-4431-9440-76dd8bb9a392" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="90b18415-d177-426a-9bcb-7b6ecca2b917" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

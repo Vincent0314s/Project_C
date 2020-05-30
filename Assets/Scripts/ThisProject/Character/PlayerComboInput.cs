@@ -32,8 +32,8 @@ public class ComboInput
 [System.Serializable]
 public class Combo
 {
-    public PlayerStateBehaviour playerState;
-    public List<PlayerStateBehaviour> doActionDuringStates;
+    public PlayerComboState playerComboState;
+    public List<PlayerComboState> doActionDuringStates;
     public List<ComboInput> inputs;
     public AttackType type;
     public UnityEvent OnInputFinished;
@@ -59,7 +59,7 @@ public class Combo
         {
             for (int i = 0; i < doActionDuringStates.Count; i++)
             {
-                if (doActionDuringStates.Contains(ps.playerState))
+                if (doActionDuringStates.Contains(ps.playerCombo))
                 {
                     return true;
                 }
@@ -116,7 +116,7 @@ public class Combo
 
 public class PlayerComboInput : MonoBehaviour
 {
-    [ArrayElementTitle("playerState")]
+    [ArrayElementTitle("playerComboState")]
     public List<Combo> combos = new List<Combo>();
     public float comboInputTime = 0.5f;
     private float currentComboInputTime;
@@ -145,9 +145,9 @@ public class PlayerComboInput : MonoBehaviour
             Combo c = combos[i];
             c.Init(ps);
             c.OnInputFinished.AddListener(() => {
-                cbv.anim.Play(c.playerState.ToString(), 0, 0);
+                cbv.anim.Play(c.playerComboState.ToString(), 0, 0);
                 cbv.GetDamageFromAttackType(c.type);
-                ps.SetStateBehaviour(c.playerState);
+                ps.SetComboState(c.playerComboState);
                 ResetCombo();
             });
         }
@@ -175,15 +175,22 @@ public class PlayerComboInput : MonoBehaviour
 
         for (int i = 0; i < combos.Count; i++)
         {
-            if (combos[i].IsEmptyKeyFirst())
+            if (ps.playerCombo != PlayerComboState.None)
             {
-                currentEmptyKeyTime += Time.deltaTime;
-                if (currentEmptyKeyTime >= emptyKeyDuration)
+                if (combos[i].IsEmptyKeyFirst())
                 {
-                    combos[i].NextComboIndex();
-                    currentEmptyKeyTime = 0;
+                    currentEmptyKeyTime += Time.deltaTime;
+                    if (currentEmptyKeyTime >= emptyKeyDuration)
+                    {
+                        combos[i].NextComboIndex();
+                        currentEmptyKeyTime = 0;
+                    }
                 }
             }
+            else {
+                combos[i].Reset();
+            }
+           
         }
 
         ComboInput currentInput = null;
