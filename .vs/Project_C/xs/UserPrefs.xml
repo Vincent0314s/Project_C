@@ -1,16 +1,21 @@
 ﻿<Properties StartupConfiguration="{81AB8DCA-7726-A80C-55E8-36C06CD97565}|">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/ThisProject/Character/PlayerSpecialised.cs">
+    <Files>
+      <File FileName="Assets/Scripts/ThisProject/Character/PlayerComboInput.cs" Line="158" Column="38" />
+      <File FileName="Assets/Scripts/ThisProject/Character/PlayerSpecialised.cs" Line="64" Column="47" />
+      <File FileName="Assets/Scripts/ThisProject/Character/CharacterMovement.cs" Line="94" Column="28" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Project_C" expanded="True">
             <Node name="Assets" expanded="True">
-              <Node name="Editor" expanded="True">
-                <Node name="ArrayElementTitleDrawer.cs" selected="True" />
-              </Node>
+              <Node name="Editor" expanded="True" />
               <Node name="Scripts" expanded="True">
                 <Node name="ThisProject" expanded="True">
-                  <Node name="Character" expanded="True" />
+                  <Node name="Character" expanded="True">
+                    <Node name="PlayerSpecialised.cs" selected="True" />
+                  </Node>
                   <Node name="Interface" expanded="True" />
                 </Node>
               </Node>
@@ -22,7 +27,7 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="99f4b98d-f849-4fdb-9c96-d61dcf9ad558" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="6a3c5c08-2453-485c-bac7-3131f8c23b6f" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -61,7 +61,7 @@ public class PlayerSpecialised : MonoBehaviour
         }
 
         cbv.isDodging = Input.GetKeyDown(KeyCode.LeftShift);
-        cbv.isDefending = Input.GetMouseButtonDown(1);
+        cbv.isDefending = Input.GetMouseButton(1);
         isMouseLeftClick = Input.GetMouseButtonDown(0);
         isForwardKey = Input.GetKeyDown(KeyCode.W);
         isBackwardKey = Input.GetKeyDown(KeyCode.S);
@@ -91,6 +91,8 @@ public class PlayerSpecialised : MonoBehaviour
 
             SetComboState(PlayerComboState.None);
         }
+
+        cbv.anim.SetBool("isDefending",cbv.isDefending);
     }
 
 
