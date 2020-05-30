@@ -3,34 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public enum InputSetting {
+public enum InputSetting
+{
     Forward,
     Backward,
     Left,
     Right,
-    Mouse_L
+    Mouse_L,
+    EmptyKey,
 }
 
 [System.Serializable]
-public class ComboInput {
+public class ComboInput
+{
     public InputSetting input;
 
-    public ComboInput(InputSetting _input) {
+    public ComboInput(InputSetting _input)
+    {
         input = _input;
     }
 
-    public bool IsSameAs(ComboInput _input) {
+    public bool IsSameAs(ComboInput _input)
+    {
         return input == _input.input;
     }
 }
 
 [System.Serializable]
-public class Combo {
+public class Combo
+{
     public PlayerStateBehaviour playerState;
     public List<PlayerStateBehaviour> doActionDuringStates;
     public List<ComboInput> inputs;
     public AttackType type;
     public UnityEvent OnInputFinished;
+    [SerializeField]
     int currentInputIndex = 0;
     PlayerSpecialised ps;
 
@@ -39,8 +46,17 @@ public class Combo {
         ps = _ps;
     }
 
-    bool CanDoState() {
-        if (doActionDuringStates.Count > 0) {
+    public bool IsEmptyKeyFirst() {
+        if (CurrentComboInput().input == InputSetting.EmptyKey && CanDoState()) {
+            return true;
+        }
+        return false;
+    }
+
+    bool CanDoState()
+    {
+        if (doActionDuringStates.Count > 0)
+        {
             for (int i = 0; i < doActionDuringStates.Count; i++)
             {
                 if (doActionDuringStates.Contains(ps.playerState))
@@ -52,7 +68,8 @@ public class Combo {
         return false;
     }
 
-    public bool CanContinueCombo(ComboInput _input) {
+    public bool CanContinueCombo(ComboInput _input)
+    {
         if (CanDoState())
         {
             if (inputs[currentInputIndex].IsSameAs(_input))
@@ -71,41 +88,47 @@ public class Combo {
                 return false;
             }
         }
-        else {
+        else
+        {
             return false;
         }
-       
     }
 
-    public ComboInput CurrentComboInput() {
-        if (currentInputIndex > inputs.Count) {
+    public ComboInput CurrentComboInput()
+    {
+        if (currentInputIndex > inputs.Count)
+        {
             return null;
         }
         return inputs[currentInputIndex];
     }
 
-    public void Reset() {
+    public void Reset()
+    {
         currentInputIndex = 0;
     }
-    
+
+    public void NextComboIndex() {
+        currentInputIndex += 1;
+    }
+
 }
 
 public class PlayerComboInput : MonoBehaviour
 {
     [ArrayElementTitle("playerState")]
-    public List<Combo> startingCombos = new List<Combo>();
-    [ArrayElementTitle("playerState")]
-    public List<Combo> duringCombos = new List<Combo>();
+    public List<Combo> combos = new List<Combo>();
     public float comboInputTime = 0.5f;
     private float currentComboInputTime;
+    public float emptyKeyDuration = 0.1f;
+    private float currentEmptyKeyTime;
 
     private CharacterBaseValue cbv;
     private PlayerSpecialised ps;
 
     private ComboInput lastInput = null;
-    private List<int> possibleStartingCombos = new List<int>();
-    private List<int> possibleDuringCombos = new List<int>();
-    bool skipFrame = false;
+    [SerializeField]
+    private List<int> possibleCombos = new List<int>();
 
 
     void Start()
@@ -115,25 +138,13 @@ public class PlayerComboInput : MonoBehaviour
         BasicComboSetup();
     }
 
-    void BasicComboSetup() {
-        for (int i = 0; i < startingCombos.Count; i++)
+    void BasicComboSetup()
+    {
+        for (int i = 0; i < combos.Count; i++)
         {
-            Combo c = startingCombos[i];
-            c.Init(ps);
-            c.OnInputFinished.AddListener(()=> {
-                skipFrame = true;
-                cbv.anim.Play(c.playerState.ToString(),0,0);
-                cbv.GetDamageFromAttackType(c.type);
-                ps.SetStateBehaviour(c.playerState);
-                ResetCombo();
-            });
-        }
-        for (int i = 0; i < duringCombos.Count; i++)
-        {
-            Combo c = duringCombos[i];
+            Combo c = combos[i];
             c.Init(ps);
             c.OnInputFinished.AddListener(() => {
-                skipFrame = true;
                 cbv.anim.Play(c.playerState.ToString(), 0, 0);
                 cbv.GetDamageFromAttackType(c.type);
                 ps.SetStateBehaviour(c.playerState);
@@ -144,24 +155,9 @@ public class PlayerComboInput : MonoBehaviour
 
     void Update()
     {
-        if (possibleStartingCombos.Count > 0)
+        if (possibleCombos.Count > 0)
         {
-            currentComboInputTime += Time.deltaTime;
-            if (currentComboInputTime >= comboInputTime)
-            {
-                if (lastInput != null)
-                {
-                    lastInput = null;
-                }
-                ResetCombo();
-            }
-        }
-        else {
-            currentComboInputTime = 0;
-        }
-
-        if (possibleDuringCombos.Count > 0)
-        {
+           
             currentComboInputTime += Time.deltaTime;
             if (currentComboInputTime >= comboInputTime)
             {
@@ -175,6 +171,19 @@ public class PlayerComboInput : MonoBehaviour
         else
         {
             currentComboInputTime = 0;
+        }
+
+        for (int i = 0; i < combos.Count; i++)
+        {
+            if (combos[i].IsEmptyKeyFirst())
+            {
+                currentEmptyKeyTime += Time.deltaTime;
+                if (currentEmptyKeyTime >= emptyKeyDuration)
+                {
+                    combos[i].NextComboIndex();
+                    currentEmptyKeyTime = 0;
+                }
+            }
         }
 
         ComboInput currentInput = null;
@@ -194,105 +203,58 @@ public class PlayerComboInput : MonoBehaviour
 
         lastInput = currentInput;
 
-     
-        List<int> failStartingCombos = new List<int>();
-        for (int i = 0; i < possibleStartingCombos.Count; i++)
+
+        List<int> failCombos = new List<int>();
+        for (int i = 0; i < possibleCombos.Count; i++)
         {
-            Combo c = startingCombos[possibleStartingCombos[i]];
+            Combo c = combos[possibleCombos[i]];
             if (c.CanContinueCombo(currentInput))
             {
                 currentComboInputTime = 0;
             }
-            else {
-                failStartingCombos.Add(i);
-            }
-        }
-
-        List<int> failDuringCombos = new List<int>();
-        for (int i = 0; i < possibleDuringCombos.Count; i++)
-        {
-            Combo c = duringCombos[possibleDuringCombos[i]];
-            if (cbv.IsInCurrentAnimationState(AnimationTag.Combo))
+            else
             {
-                if (c.CanContinueCombo(currentInput))
-                {
-                    currentComboInputTime = 0;
-                }
-                else
-                {
-                    failDuringCombos.Add(i);
-                }
+                failCombos.Add(i);
             }
-          
         }
 
-        if (skipFrame)
+        for (int i = 0; i < combos.Count; i++)
         {
-            skipFrame = false;
-            return;
-        }
-
-
-        for (int i = 0; i < startingCombos.Count; i++)
-        {
-            if (possibleStartingCombos.Contains(i))
+            if (possibleCombos.Contains(i))
             {
                 continue;
             }
-            if (startingCombos[i].CanContinueCombo(currentInput)) {
-                possibleStartingCombos.Add(i);
+         
+            if (combos[i].CanContinueCombo(currentInput))
+            {
+                possibleCombos.Add(i);
                 currentComboInputTime = 0;
             }
+
         }
 
-        for (int i = 0; i < duringCombos.Count; i++)
+        if (failCombos.Count > 0)
         {
-            if (possibleDuringCombos.Contains(i))
+            foreach (int i in failCombos)
             {
-                continue;
-            }
-            if (cbv.IsInCurrentAnimationState(AnimationTag.Combo)) {
-                if (duringCombos[i].CanContinueCombo(currentInput))
-                {
-                    possibleDuringCombos.Add(i);
-                    currentComboInputTime = 0;
-                }
+                possibleCombos.RemoveAt(i);
             }
         }
 
-        if (failStartingCombos.Count > 0) {
-            foreach (int i in failStartingCombos)
-            {
-                possibleStartingCombos.RemoveAt(i);
-            }
-        }
-
-        if (failDuringCombos.Count > 0)
+        if (possibleCombos.Count <= 0)
         {
-            foreach (int i in failDuringCombos)
-            {
-                possibleDuringCombos.RemoveAt(i);
-            }
         }
-
-        //if (possibleStartingCombos.Count <= 0) {
-        //}
     }
 
-    void ResetCombo() {
+    void ResetCombo()
+    {
         currentComboInputTime = 0;
 
-        for (int i = 0; i < possibleStartingCombos.Count; i++)
+        for (int i = 0; i < possibleCombos.Count; i++)
         {
-            Combo c = startingCombos[possibleStartingCombos[i]];
+            Combo c = combos[possibleCombos[i]];
             c.Reset();
         }
-        for (int i = 0; i < possibleDuringCombos.Count; i++)
-        {
-            Combo c = duringCombos[possibleDuringCombos[i]];
-            c.Reset();
-        }
-        possibleDuringCombos.Clear();
-        possibleStartingCombos.Clear();
+        possibleCombos.Clear();
     }
 }

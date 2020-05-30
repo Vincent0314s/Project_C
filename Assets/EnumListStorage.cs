@@ -33,5 +33,7 @@ public enum AnimationTag
 	Idle,
 	Movement,
 	Combo,
+	Defending,
+	Hurt,
 
 }

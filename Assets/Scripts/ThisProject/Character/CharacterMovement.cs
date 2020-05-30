@@ -89,4 +89,8 @@ public class CharacterMovement : MonoBehaviour
         }
       
     }
+
+    public void StopMoveing() {
+        currentSpeed = 0;
+    }
 }

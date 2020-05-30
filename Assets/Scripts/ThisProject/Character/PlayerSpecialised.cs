@@ -11,6 +11,7 @@ public enum PlayerStateBehaviour
     Dodging,
     L,
     LL,
+    SL,
     Temp,
     Hurt_Light,
     Hurt_Heavy,
@@ -26,11 +27,14 @@ public class PlayerSpecialised : MonoBehaviour
     private CharacterMovement cm;
     private CharacterBaseValue cbv;
 
+    private Vector3 direction;
+
     public bool isMouseLeftClick { get; private set; }
     public bool isForwardKey { get; private set; }
     public bool isBackwardKey { get; private set; }
     public bool isTurnRightKey { get; private set; }
     public bool isTurnLeftKey { get; private set; }
+
 
     void Start()
     {
@@ -41,10 +45,16 @@ public class PlayerSpecialised : MonoBehaviour
 
     void Update()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        Vector3 direction = new Vector3(horizontal, 0, vertical).normalized;
-        cm.SetMovementDirection(direction);
+        if (cbv.IsInCurrentAnimationState(AnimationTag.Idle) || cbv.IsInCurrentAnimationState(AnimationTag.Movement))
+        {
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+            direction = new Vector3(horizontal, 0, vertical).normalized;
+            cm.SetMovementDirection(direction);
+        }
+        else {
+            cm.StopMoveing();
+        }
 
         cbv.isDodging = Input.GetKeyDown(KeyCode.LeftShift);
         cbv.isDefending = Input.GetMouseButtonDown(1);
@@ -53,16 +63,17 @@ public class PlayerSpecialised : MonoBehaviour
         isBackwardKey = Input.GetKeyDown(KeyCode.S);
         isTurnRightKey = Input.GetKeyDown(KeyCode.D);
         isTurnLeftKey = Input.GetKeyDown(KeyCode.A);
+        
 
-        if (cm.isMoving) {
-            if (cm.isForward)
-            {
-                SetStateBehaviour(PlayerStateBehaviour.MovingForward);
-            }
-            else {
-                SetStateBehaviour(PlayerStateBehaviour.MovingBackward);
-            }
-        }
+        //if (cm.isMoving) {
+        //    if (cm.isForward)
+        //    {
+        //        SetStateBehaviour(PlayerStateBehaviour.MovingForward);
+        //    }
+        //    else {
+        //        SetStateBehaviour(PlayerStateBehaviour.MovingBackward);
+        //    }
+        //}
 
         if (cbv.isDefending)
             SetStateBehaviour(PlayerStateBehaviour.Defending);
@@ -74,8 +85,9 @@ public class PlayerSpecialised : MonoBehaviour
             if (direction == Vector3.zero)
                 SetStateBehaviour(PlayerStateBehaviour.Idle);
         }
-
     }
+
+
 
     public void SetStateBehaviour(PlayerStateBehaviour psb) {
         switch (psb) {
