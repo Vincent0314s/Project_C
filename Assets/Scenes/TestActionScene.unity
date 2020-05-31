@@ -633,7 +633,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1270656717}
-  m_LocalRotation: {x: 0.2815582, y: 0.000000016510285, z: -0.000000004844601, w: 0.9595442}
+  m_LocalRotation: {x: 0.2815582, y: -0.000000016510283, z: 0.0000000048445945, w: 0.9595442}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1202,7 +1202,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2106878978}
-  m_LocalRotation: {x: 0.29891938, y: 0.000000016419682, z: -0.0000000051433258, w: 0.9542784}
+  m_LocalRotation: {x: 0.29891938, y: -0.000000016419676, z: 0.0000000051433164, w: 0.9542784}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1217,6 +1217,38 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 190452299, guid: abbc344c573b74c2294be769d9fafe3e, type: 3}
+      propertyPath: combos.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 190452299, guid: abbc344c573b74c2294be769d9fafe3e, type: 3}
+      propertyPath: combos.Array.data[5].doActionDuringStates.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 190452299, guid: abbc344c573b74c2294be769d9fafe3e, type: 3}
+      propertyPath: combos.Array.data[5].inputs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 190452299, guid: abbc344c573b74c2294be769d9fafe3e, type: 3}
+      propertyPath: combos.Array.data[5].playerComboState
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 190452299, guid: abbc344c573b74c2294be769d9fafe3e, type: 3}
+      propertyPath: combos.Array.data[5].doActionDuringStates.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 190452299, guid: abbc344c573b74c2294be769d9fafe3e, type: 3}
+      propertyPath: combos.Array.data[5].inputs.Array.data[0].input
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 190452299, guid: abbc344c573b74c2294be769d9fafe3e, type: 3}
+      propertyPath: combos.Array.data[5].inputs.Array.data[1].input
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 190452299, guid: abbc344c573b74c2294be769d9fafe3e, type: 3}
+      propertyPath: combos.Array.data[5].waitForPlayAnimNormalizedTime
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 2065079736, guid: abbc344c573b74c2294be769d9fafe3e, type: 3}
       propertyPath: m_IsActive
       value: 0

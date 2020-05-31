@@ -11,6 +11,7 @@ public enum InputSetting
     Right,
     Mouse_L,
     EmptyKey,
+    LeftShift,
 }
 
 [System.Serializable]
@@ -223,6 +224,8 @@ public class PlayerComboInput : MonoBehaviour
             currentInput = new ComboInput(InputSetting.Left);
         if (ps.isTurnRightKey)
             currentInput = new ComboInput(InputSetting.Right);
+        if (cbv.isDodging)
+            currentInput = new ComboInput(InputSetting.LeftShift);
 
         if (currentInput == null)
             return;
