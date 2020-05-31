@@ -72,6 +72,7 @@
     <Compile Include="Assets\Scripts\ThisProject\Character\PlayerSpecialised.cs" />
     <Compile Include="Assets\Scripts\ThisProject\CombatMethod.cs" />
     <Compile Include="Assets\Scripts\ThisProject\CursorManager.cs" />
+    <Compile Include="Assets\Scripts\ThisProject\Fundamental.cs" />
     <Compile Include="Assets\Scripts\ThisProject\Interface\IMovement.cs" />
     <Compile Include="Assets\Scripts\UsefulScript\AI\AIStateManager.cs" />
     <Compile Include="Assets\Scripts\UsefulScript\AI\EnemyStateMachine.cs" />
@@ -122,6 +123,12 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>/Users/vincent/Documents/GitHub/Project_C/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Recorder.Editor">
+      <HintPath>/Users/vincent/Documents/GitHub/Project_C/Library/ScriptAssemblies/Unity.Recorder.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Recorder">
+      <HintPath>/Users/vincent/Documents/GitHub/Project_C/Library/ScriptAssemblies/Unity.Recorder.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Hub/Editor/2019.3.10f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

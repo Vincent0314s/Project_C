@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class PlayerAnimationEvent : BasicAnimationEvent
 {
-    // Start is called before the first frame update
+    private CharacterBaseValue cbv;
+
     void Start()
     {
-        
+        cbv = GetComponentInParent<CharacterBaseValue>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public void CharacterForceForward(float force) {
+        Fundamental.ComboForceForward(cbv.rb,force);
     }
 }

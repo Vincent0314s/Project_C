@@ -20,7 +20,10 @@ public enum PlayerComboState {
     None,
     L,
     LL,
-    SL,
+    WL,
+    WLSL,
+    WWL,
+    CanNextCombo,
 }
 
 
@@ -49,16 +52,11 @@ public class PlayerSpecialised : MonoBehaviour
 
     void Update()
     {
-        if (cbv.IsInCurrentAnimationState(AnimationTag.Idle) || cbv.IsInCurrentAnimationState(AnimationTag.Movement))
-        {
-            float horizontal = Input.GetAxisRaw("Horizontal");
-            float vertical = Input.GetAxisRaw("Vertical");
-            direction = new Vector3(horizontal, 0, vertical).normalized;
-            cm.SetMovementDirection(direction);
-        }
-        else {
-            cm.StopMoveing();
-        }
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        direction = new Vector3(horizontal, 0, vertical).normalized;
+        cm.SetMovementDirection(direction);
+
 
         cbv.isDodging = Input.GetKeyDown(KeyCode.LeftShift);
         cbv.isDefending = Input.GetMouseButton(1);
@@ -67,32 +65,38 @@ public class PlayerSpecialised : MonoBehaviour
         isBackwardKey = Input.GetKeyDown(KeyCode.S);
         isTurnRightKey = Input.GetKeyDown(KeyCode.D);
         isTurnLeftKey = Input.GetKeyDown(KeyCode.A);
+
         
-
-        //if (cm.isMoving) {
-        //    if (cm.isForward)
-        //    {
-        //        SetStateBehaviour(PlayerStateBehaviour.MovingForward);
-        //    }
-        //    else {
-        //        SetStateBehaviour(PlayerStateBehaviour.MovingBackward);
-        //    }
-        //}
-
-        if (cbv.isDefending)
-            SetStateBehaviour(PlayerBasicState.Defending);
-        if (cbv.isDodging)
-            SetStateBehaviour(PlayerBasicState.Dodging);
         if (cbv.IsDead())
             SetStateBehaviour(PlayerBasicState.Dead);
-        if (!cbv.IsInCurrentAnimationState(AnimationTag.Combo)) {
-            if (direction == Vector3.zero)
-                SetStateBehaviour(PlayerBasicState.Idle);
 
-            SetComboState(PlayerComboState.None);
+        if (!Input.anyKey && cbv.IsInOriginalAnimationState())
+        {
+            SetStateBehaviour(PlayerBasicState.Idle);
+        }
+        else {
+            if (cm.isMoving)
+            {
+                if (cm.isForward)
+                {
+                    SetStateBehaviour(PlayerBasicState.MovingForward);
+                }
+                else
+                {
+                    SetStateBehaviour(PlayerBasicState.MovingBackward);
+                }
+            }
+
+            if (cbv.isDefending)
+                SetStateBehaviour(PlayerBasicState.Defending);
+            if (cbv.isDodging)
+                SetStateBehaviour(PlayerBasicState.Dodging);
         }
 
         cbv.anim.SetBool("isDefending",cbv.isDefending);
+        cbv.anim.SetBool("isDodging",cbv.isDodging);
+        cbv.anim.SetFloat("Horizontal",direction.x);
+        cbv.anim.SetFloat("Vertical",direction.z);
     }
 
 
@@ -112,7 +116,6 @@ public class PlayerSpecialised : MonoBehaviour
 
                 break;
             case PlayerBasicState.Dodging:
-
                 break;
             case PlayerBasicState.Hurt_Light:
 
@@ -135,5 +138,9 @@ public class PlayerSpecialised : MonoBehaviour
 
     public void SetComboState(PlayerComboState pcs) {
         playerCombo = pcs;
+    }
+
+    public bool IsPlayerOnlyMoveing() {
+        return playerState == PlayerBasicState.Idle || playerState == PlayerBasicState.MovingBackward || playerState == PlayerBasicState.MovingForward;
     }
 }

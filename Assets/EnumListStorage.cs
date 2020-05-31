@@ -35,6 +35,6 @@ public enum AnimationTag
 	Combo,
 	Defending,
 	Hurt,
-	Recover,
+	Dodging,
 
 }

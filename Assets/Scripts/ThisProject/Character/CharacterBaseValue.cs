@@ -66,4 +66,15 @@ public class CharacterBaseValue : MonoBehaviour
         }
         return false;
     }
+
+    public bool IsInOriginalAnimationState() {
+        if (IsInCurrentAnimationState(AnimationTag.Idle) || IsInCurrentAnimationState(AnimationTag.Movement)) {
+            return true;
+        }
+        return false;
+    }
+
+    public float GetCurrentAnimationStateNormalizedTime() {
+        return anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    }
 }

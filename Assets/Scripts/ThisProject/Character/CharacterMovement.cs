@@ -58,31 +58,38 @@ public class CharacterMovement : MonoBehaviour
     {
         if (isPlayer)
         {
-            if (direction.magnitude >= 0.1f)
+            if (cbv.IsInOriginalAnimationState())
             {
-                isMoving = true;
-                float targetRotation = Mathf.Atan2(direction.x, Mathf.Abs(direction.z)) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
-                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothValue);
-                transform.rotation = Quaternion.Euler(0, angle, 0f);
-                if (direction.z >= 0)
+                if (direction.magnitude >= 0.1f)
                 {
-                    isForward = true;
-                    Vector3 moveDir = Quaternion.Euler(0, targetRotation, 0f) * Vector3.forward;
-                    float targetSpeed = runSpeed * direction.magnitude;
-                    currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref forwardMovementSmoothVelocity, forwardMovementSmoothValue);
-                    cbv.rb.MovePosition(transform.position + moveDir.normalized * currentSpeed * Time.fixedDeltaTime);
+                    isMoving = true;
+                    float targetRotation = Mathf.Atan2(direction.x, Mathf.Abs(direction.z)) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+                    float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothValue);
+                    transform.rotation = Quaternion.Euler(0, angle, 0f);
+                    if (direction.z >= 0)
+                    {
+                        isForward = true;
+                        Vector3 moveDir = Quaternion.Euler(0, targetRotation, 0f) * Vector3.forward;
+                        float targetSpeed = runSpeed * direction.magnitude;
+                        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref forwardMovementSmoothVelocity, forwardMovementSmoothValue);
+                        cbv.rb.MovePosition(transform.position + moveDir.normalized * currentSpeed * Time.fixedDeltaTime);
+                    }
+                    else
+                    {
+                        isForward = false;
+                        Vector3 moveDir = Quaternion.Euler(0, targetRotation, 0f) * Vector3.forward;
+                        float targetSpeed = walkSpeed * direction.magnitude;
+                        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref backwardMovementSmoothVelocity, backwardMovementSmoothValue);
+                        cbv.rb.MovePosition(transform.position + moveDir.normalized * currentSpeed * Time.fixedDeltaTime);
+                    }
                 }
                 else
                 {
-                    isForward = false;
-                    Vector3 moveDir = Quaternion.Euler(0, targetRotation, 0f) * Vector3.forward;
-                    float targetSpeed = walkSpeed * direction.magnitude;
-                    currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref backwardMovementSmoothVelocity, backwardMovementSmoothValue);
-                    cbv.rb.MovePosition(transform.position + moveDir.normalized * currentSpeed * Time.fixedDeltaTime);
+                    isMoving = false;
                 }
             }
             else {
-                isMoving = false;
+                StopMoveing();
             }
         }
         else {
@@ -92,6 +99,9 @@ public class CharacterMovement : MonoBehaviour
     }
 
     public void StopMoveing() {
+        isMoving = false;
+        cbv.anim.SetFloat("ForwardSpeed", 0f);
+        cbv.anim.SetFloat("BackwardSpeed", 0f);
         currentSpeed = 0;
     }
 }
