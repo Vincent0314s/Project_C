@@ -12,6 +12,10 @@ public class PlayerAnimationEvent : BasicAnimationEvent
     }
 
     public void CharacterForceForward(float force) {
-        Fundamental.ComboForceForward(cbv.rb,force);
+        Fundamental.AddForceLocalZ(cbv.rb,force);
+    }
+
+    public void CharacterForceHorizontal(float force) {
+        Fundamental.AddForceLocalX(cbv.rb, force);
     }
 }

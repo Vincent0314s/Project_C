@@ -56,46 +56,121 @@ public class CharacterMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isPlayer)
+        //if (isPlayer)
+        //{
+        //    if (cbv.IsInOriginalAnimationState())
+        //    {
+        //        if (direction.magnitude >= 0.1f)
+        //        {
+        //            isMoving = true;
+        //            //float targetRotation = Mathf.Atan2(direction.x, Mathf.Abs(direction.z)) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
+        //            float targetRotation = Mathf.Atan2(direction.x, Mathf.Abs(direction.z)) * Mathf.Rad2Deg + cbv.cam.eulerAngles.y;
+        //            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothValue);
+        //            transform.rotation = Quaternion.Euler(0, angle, 0f);
+        //            if (direction.z >= 0)
+        //            {
+        //                isForward = true;
+        //                Vector3 moveDir = Quaternion.Euler(0, targetRotation, 0f) * Vector3.forward;
+        //                float targetSpeed = runSpeed * direction.magnitude;
+        //                currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref forwardMovementSmoothVelocity, forwardMovementSmoothValue);
+        //                cbv.rb.MovePosition(transform.position + moveDir.normalized * currentSpeed * Time.fixedDeltaTime);
+        //            }
+        //            else
+        //            {
+        //                isForward = false;
+        //                Vector3 moveDir = Quaternion.Euler(0, targetRotation, 0f) * Vector3.forward;
+        //                float targetSpeed = walkSpeed * direction.magnitude;
+        //                currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref backwardMovementSmoothVelocity, backwardMovementSmoothValue);
+        //                cbv.rb.MovePosition(transform.position + moveDir.normalized * currentSpeed * Time.fixedDeltaTime);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            isMoving = false;
+        //        }
+        //    }
+        //    else {
+        //        StopMoveing();
+        //    }
+        //}
+        //else {
+        //    //Enemy
+        //    if (cbv.IsInOriginalAnimationState())
+        //    {
+        //        if (direction.magnitude >= 0.1f)
+        //        {
+        //            isMoving = true;
+        //            float targetRotation = Mathf.Atan2(direction.x, Mathf.Abs(direction.z)) * Mathf.Rad2Deg + cbv.cam.eulerAngles.y;
+        //            float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothValue);
+        //            transform.rotation = Quaternion.Euler(0, angle, 0f);
+        //            if (direction.z >= 0)
+        //            {
+        //                isForward = true;
+        //                Vector3 moveDir = Quaternion.Euler(0, targetRotation, 0f) * Vector3.forward;
+        //                float targetSpeed = runSpeed * direction.magnitude;
+        //                currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref forwardMovementSmoothVelocity, forwardMovementSmoothValue);
+        //                cbv.rb.MovePosition(transform.position + moveDir.normalized * currentSpeed * Time.fixedDeltaTime);
+        //            }
+        //            else
+        //            {
+        //                isForward = false;
+        //                Vector3 moveDir = Quaternion.Euler(0, targetRotation, 0f) * Vector3.forward;
+        //                float targetSpeed = walkSpeed * direction.magnitude;
+        //                currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref backwardMovementSmoothVelocity, backwardMovementSmoothValue);
+        //                cbv.rb.MovePosition(transform.position + moveDir.normalized * currentSpeed * Time.fixedDeltaTime);
+        //            }
+        //        }
+        //        else
+        //        {
+        //            isMoving = false;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        StopMoveing();
+        //    }
+        //}
+
+        if (cbv.IsInOriginalAnimationState())
         {
-            if (cbv.IsInOriginalAnimationState())
+            if (direction.magnitude >= 0.1f)
             {
-                if (direction.magnitude >= 0.1f)
+                isMoving = true;
+                float targetRotation = Mathf.Atan2(direction.x, Mathf.Abs(direction.z)) * Mathf.Rad2Deg + cbv.cam.eulerAngles.y;
+                float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothValue);
+                transform.rotation = Quaternion.Euler(0, angle, 0f);
+                if (direction.z >= 0)
                 {
-                    isMoving = true;
-                    float targetRotation = Mathf.Atan2(direction.x, Mathf.Abs(direction.z)) * Mathf.Rad2Deg + Camera.main.transform.eulerAngles.y;
-                    float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothValue);
-                    transform.rotation = Quaternion.Euler(0, angle, 0f);
-                    if (direction.z >= 0)
-                    {
-                        isForward = true;
-                        Vector3 moveDir = Quaternion.Euler(0, targetRotation, 0f) * Vector3.forward;
-                        float targetSpeed = runSpeed * direction.magnitude;
-                        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref forwardMovementSmoothVelocity, forwardMovementSmoothValue);
-                        cbv.rb.MovePosition(transform.position + moveDir.normalized * currentSpeed * Time.fixedDeltaTime);
-                    }
-                    else
-                    {
-                        isForward = false;
-                        Vector3 moveDir = Quaternion.Euler(0, targetRotation, 0f) * Vector3.forward;
-                        float targetSpeed = walkSpeed * direction.magnitude;
-                        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref backwardMovementSmoothVelocity, backwardMovementSmoothValue);
-                        cbv.rb.MovePosition(transform.position + moveDir.normalized * currentSpeed * Time.fixedDeltaTime);
-                    }
+                    isForward = true;
+                    Vector3 moveDir = Quaternion.Euler(0, targetRotation, 0f) * Vector3.forward;
+                    float targetSpeed = runSpeed * direction.magnitude;
+                    currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref forwardMovementSmoothVelocity, forwardMovementSmoothValue);
+                    cbv.rb.MovePosition(transform.position + moveDir.normalized * currentSpeed * Time.fixedDeltaTime);
                 }
                 else
                 {
-                    isMoving = false;
+                    isForward = false;
+                    Vector3 moveDir = Quaternion.Euler(0, targetRotation, 0f) * Vector3.forward;
+                    float targetSpeed = walkSpeed * direction.magnitude;
+                    currentSpeed = Mathf.SmoothDamp(currentSpeed, targetSpeed, ref backwardMovementSmoothVelocity, backwardMovementSmoothValue);
+                    cbv.rb.MovePosition(transform.position + moveDir.normalized * currentSpeed * Time.fixedDeltaTime);
                 }
             }
-            else {
-                StopMoveing();
+            else
+            {
+                isMoving = false;
             }
         }
-        else {
-            //Enemy
+        else
+        {
+            StopMoveing();
         }
-      
+    }
+
+    public void RotateToTarget() {
+        float targetRotation = Mathf.Atan2(direction.x, Mathf.Abs(direction.z)) * Mathf.Rad2Deg + cbv.cam.eulerAngles.y;
+        float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetRotation, ref turnSmoothVelocity, turnSmoothValue);
+        transform.rotation = Quaternion.Euler(0, angle, 0f);
     }
 
     public void StopMoveing() {

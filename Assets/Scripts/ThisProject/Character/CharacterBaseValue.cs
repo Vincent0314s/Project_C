@@ -30,17 +30,22 @@ public class CharacterBaseValue : MonoBehaviour
 
     public Animator anim { get; private set; }
     public Rigidbody rb { get; private set; }
+    public Transform target;
+    public Transform cam;
 
     //Boolean Property
     public bool isDodging { get; set; }
     public bool isDefending { get; set; }
-
+    public bool isLockingTarget { get; set; }
 
     private void Start()
     {
         currentHP = maxHP;
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody>();
+        if (characters != Characters.Player) {
+            target = GameObject.FindGameObjectWithTag("Player").transform;
+        }
     }
 
     public float GetDamageFromAttackType(AttackType _type)
@@ -76,5 +81,11 @@ public class CharacterBaseValue : MonoBehaviour
 
     public float GetCurrentAnimationStateNormalizedTime() {
         return anim.GetCurrentAnimatorStateInfo(0).normalizedTime;
+    }
+
+    public void CameraLookAtTarget() {
+        if (target!=null) {
+            cam.LookAt(target);
+        }
     }
 }
